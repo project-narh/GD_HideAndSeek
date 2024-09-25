@@ -24,15 +24,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-
-        StatusText.text = "Stats : " + PhotonNetwork.NetworkClientState.ToString();
+        switch(PhotonNetwork.NetworkClientState.ToString())
+        {
+            case "ConnectedToMasterServer":
+                StatusText.text = "Stats : 서버 연결 완료";
+                break;
+            default:
+                StatusText.text = "Stats : " + PhotonNetwork.NetworkClientState.ToString();
+                break;
+        }
     }
 
     void Connect() => PhotonNetwork.ConnectUsingSettings(); // 포톤 서버에 연결
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinRandomRoom(); // 랜덤방에 참여 시도 만일 방이 없다면 OnJoinRandomFailed 콜백이 호출될까봐
+        //PhotonNetwork.JoinRandomRoom(); // 랜덤방에 참여 시도 만일 방이 없다면 OnJoinRandomFailed 콜백이 호출될까봐
+        print("서버 접속 성공");
+        //PhotonNetwork.LocalPlayer.NickName = this.NickNameInput.text;
     }
 
     public override void OnJoinedRoom()
@@ -43,7 +52,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public void JoinLobby() => PhotonNetwork.JoinLobby();
-    public override void OnJoinedLobby() => Debug.Log("로비 접속"); 
+    public override void OnJoinedLobby() => Debug.Log("로비 접속");
+
+    public void connect() => PhotonNetwork.ConnectUsingSettings();
 
     public void Disconnect() => PhotonNetwork.Disconnect();
 
