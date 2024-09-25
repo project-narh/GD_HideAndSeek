@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public Text StatusText; // 사용자의 접속상태
-    public Text roomNumber; // 룸넘버
+    public InputField roomName; // 룸넘버
     public InputField NickNameInput; // 사용자가 닉네임 입력
     public GameObject Cube; //플레이어 생성 위치
     public string gameVersion = "1.0"; // 게임 버전을 위한 변수
@@ -29,6 +29,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             case "ConnectedToMasterServer":
                 StatusText.text = "Stats : 서버 연결 완료";
                 break;
+
+            case "JoinedLobby":
+                StatusText.text = "Stats : 로비 접속";
+                break;
             default:
                 StatusText.text = "Stats : " + PhotonNetwork.NetworkClientState.ToString();
                 break;
@@ -41,12 +45,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         //PhotonNetwork.JoinRandomRoom(); // 랜덤방에 참여 시도 만일 방이 없다면 OnJoinRandomFailed 콜백이 호출될까봐
         print("서버 접속 성공");
+        PhotonNetwork.JoinLobby();
         //PhotonNetwork.LocalPlayer.NickName = this.NickNameInput.text;
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("_Player", Cube.transform.position, Quaternion.identity);
+        //PhotonNetwork.Instantiate("_Player", Cube.transform.position, Quaternion.identity);
         // 플레이어3이라는 프리팹을 방에 있는 모든 플레이어에게 동기화 하여 생성
         print("방 참가 완료");
     }
@@ -66,13 +71,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         this.CreateRoom(); // 방 참여 실패 했을때 호출하여 새로운 방 생성
     }
 
-    void CreateRoom()
+    public void CreateRoom()
     {
-        Debug.Log("방 생성 시도");
-        PhotonNetwork.CreateRoom(roomNumber.text, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
+        PhotonNetwork.CreateRoom(roomName.text, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
     }
 
-    public void JoinRoom() => PhotonNetwork.JoinRoom(roomNumber.text);
+    public void JoinRoom() => PhotonNetwork.JoinRoom(roomName.text);
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 

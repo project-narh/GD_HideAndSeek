@@ -767,9 +767,7 @@ RectTransform:
   m_Children:
   - {fileID: 1261635681}
   - {fileID: 1465959946}
-  - {fileID: 825562545}
   - {fileID: 1195654890}
-  - {fileID: 1122722731}
   - {fileID: 1756551645}
   - {fileID: 1351527346}
   m_Father: {fileID: 337355002}
@@ -845,16 +843,16 @@ RectTransform:
   m_GameObject: {fileID: 825562544}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 677041443}
   - {fileID: 1349334707}
-  m_Father: {fileID: 781543410}
+  m_Father: {fileID: 1465959946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 43}
+  m_AnchoredPosition: {x: 163, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825562546
@@ -991,16 +989,16 @@ RectTransform:
   m_GameObject: {fileID: 1122722730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 197033532}
   - {fileID: 1703822878}
-  m_Father: {fileID: 781543410}
+  m_Father: {fileID: 1195654890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 25}
+  m_AnchoredPosition: {x: 163, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1122722732
@@ -1121,7 +1119,7 @@ GameObject:
   - component: {fileID: 1195654892}
   - component: {fileID: 1195654891}
   m_Layer: 5
-  m_Name: Room_number
+  m_Name: Room_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1138,7 +1136,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1122722731}
   m_Father: {fileID: 781543410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1233,11 +1232,11 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Stats :  null'
 --- !u!222 &1261635680
@@ -1264,7 +1263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -176.9, y: 155.9}
+  m_AnchoredPosition: {x: -138, y: 95.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1349334706
@@ -1428,7 +1427,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1351527348}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897771998}
+        m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
+        m_MethodName: JoinRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1351527348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,7 +1507,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 825562545}
   m_Father: {fileID: 781543410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1799,7 +1811,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1756551647}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897771998}
+        m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
+        m_MethodName: CreateRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1756551647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,8 +1892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatusText: {fileID: 1261635679}
-  roomNumber: {fileID: 0}
-  NickNameInput: {fileID: 0}
+  roomName: {fileID: 1122722732}
+  NickNameInput: {fileID: 825562546}
   Cube: {fileID: 0}
   gameVersion: 1.0
 --- !u!4 &1897771999
