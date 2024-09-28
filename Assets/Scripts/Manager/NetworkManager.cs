@@ -2,9 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public static NetworkManager Instance;
+
     public Text StatusText; // 사용자의 접속상태
     public InputField roomName; // 룸넘버
     public InputField NickNameInput; // 사용자가 닉네임 입력
@@ -13,7 +16,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true; // 방에 참여한 클라이언트 동일한 씬 로드
+        if(Instance == null)
+        {
+            PhotonNetwork.AutomaticallySyncScene = true; // 방에 참여한 클라이언트 동일한 씬 로드
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Start()
@@ -33,6 +45,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             case "JoinedLobby":
                 StatusText.text = "Stats : 로비 접속";
                 break;
+
             default:
                 StatusText.text = "Stats : " + PhotonNetwork.NetworkClientState.ToString();
                 break;
@@ -54,6 +67,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate("_Player", Cube.transform.position, Quaternion.identity);
         // 플레이어3이라는 프리팹을 방에 있는 모든 플레이어에게 동기화 하여 생성
         print("방 참가 완료");
+        SceneManager.LoadScene("Game");
     }
 
     public void JoinLobby() => PhotonNetwork.JoinLobby();
@@ -81,6 +95,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 
     public void LeaveRoom() => PhotonNetwork.LeaveRoom();
-    public override void OnCreatedRoom() => print("방 만들기 완료");
+    public override void OnCreatedRoom()
+    {
+        print("방 만들기 완료");
+    }
 
+    [ContextMenu("정보")]
+    void info()
+    {
+
+    }
 }

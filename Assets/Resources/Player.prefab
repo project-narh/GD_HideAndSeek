@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1062011236070600354}
   - component: {fileID: 5219451992813276076}
   - component: {fileID: 1383915883755310799}
-  - component: {fileID: 8742319740713063182}
+  - component: {fileID: 8111396498187420302}
   m_Layer: 0
-  m_Name: Player3
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1383915883755310799}
-  - {fileID: 8742319740713063182}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8742319740713063182
+--- !u!114 &8111396498187420302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,10 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 852618750666726036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 3549098521b40f644847468a3d6df833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  speed: 2
