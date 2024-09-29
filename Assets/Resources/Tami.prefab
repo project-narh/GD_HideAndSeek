@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
       propertyPath: m_Name
-      value: tami_fin
+      value: Tami
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
       propertyPath: m_Layer
@@ -141,7 +141,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7787899116425661957}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

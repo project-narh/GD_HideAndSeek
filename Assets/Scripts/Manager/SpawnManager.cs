@@ -25,7 +25,8 @@ public class SpawnManager : MonoBehaviour
             if (!Physics.CheckSphere(randomPosition, 0.5f, mask))
             {
                 // 충돌체가 없다면 프리팹 소환
-                Instantiate(prefab, randomPosition, Quaternion.identity);
+                Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                PhotonNetwork.Instantiate("Tami", randomPosition, randomRotation);
                 index--;
             }
         }
@@ -48,6 +49,7 @@ public class SpawnManager : MonoBehaviour
 
         // 무작위 위치 계산 (구 내부의 점)
         Vector3 randomPosition = areaCenter + randomDirection * randomDistance;
+        randomPosition.y = 0.9f;
         return randomPosition;
     }
     
