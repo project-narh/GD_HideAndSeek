@@ -9,7 +9,6 @@ public class Loader : MonoBehaviour
     void Start()
     {
         NetworkManager.Instance.StatusText = stat;
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

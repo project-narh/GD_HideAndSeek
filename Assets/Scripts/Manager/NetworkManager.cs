@@ -67,7 +67,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate("_Player", Cube.transform.position, Quaternion.identity);
         // 플레이어3이라는 프리팹을 방에 있는 모든 플레이어에게 동기화 하여 생성
         print("방 참가 완료");
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Gane");
     }
 
     public void JoinLobby() => PhotonNetwork.JoinLobby();
