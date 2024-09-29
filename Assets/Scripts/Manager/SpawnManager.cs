@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public string AIprefab;
 

@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System.Net.NetworkInformation;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
@@ -15,13 +13,18 @@ public class StageManager : MonoBehaviour
     }
     [SerializeField] int index = 0; // 현재 스테이지
     [SerializeField] Stage_Data[] data;
+    private SpawnManager spawnManager;
     private int player_count;
     private float stageTimer;
     private bool isStageActive = false;
 
     private const string StageIndexKey = "StageIndex";
-    private const string PlayerCountKey = "PlayerCount";
+    private const string PlayerCountKey = "PlayerCount"; // 살아남은 플레이어 수
 
+    private void Awake()
+    {
+        spawnManager = GetComponent<SpawnManager>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,6 +55,7 @@ public class StageManager : MonoBehaviour
         this.index = index;
         player_count = PhotonNetwork.PlayerList.Length;
         stageTimer = data[index].limitTime;
+        int mob_count = data[index].maxCount - player_count;
 
         // 스테이지 데이터 동기화
         Hashtable stageProps = new Hashtable

@@ -1,10 +1,10 @@
 using Photon.Pun;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PhotonView pv;
+    private Camera cam;
     [SerializeField] float speed = 2f;
     [SerializeField] float rotationSpeed = 100f;
     private Transform body;
@@ -14,6 +14,16 @@ public class PlayerController : MonoBehaviour
     {
         body = transform.GetChild(0);
         pv = GetComponent<PhotonView>();
+        cam = GetComponentInChildren<Camera>();
+
+        if(pv.IsMine)
+        {
+            cam.gameObject.SetActive(true);
+        }
+        else
+        {
+            cam.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
