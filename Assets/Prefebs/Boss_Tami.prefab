@@ -64,56 +64,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: tami_fin
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
-      propertyPath: m_Layer
-      value: 30
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -1885182292878184900}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -1149925079450065177}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
---- !u!1 &5924657473001031868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 73b4ccac19bc44a4c92cbba17ab6654b, type: 3}
-  m_PrefabInstance: {fileID: 6843770786442524141}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &-1885182292878184900
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924657473001031868}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.14410608, y: 0.11784031, z: 0.0857436}
-  m_Center: {x: -0.008441697, y: 0.010973125, z: -0.00046041977}
---- !u!114 &-1149925079450065177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924657473001031868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d25b850a17d4633439f552a59f7f04e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

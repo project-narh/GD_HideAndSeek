@@ -67,11 +67,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate("_Player", Cube.transform.position, Quaternion.identity);
         // 플레이어3이라는 프리팹을 방에 있는 모든 플레이어에게 동기화 하여 생성
         print("방 참가 완료");
-        SceneManager.LoadScene("Game");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("방을 생성한 마스터 클라이언트입니다.");
+        }
+        else
+        {
+            Debug.Log("방에 입장한 클라이언트입니다.");
+        }
+        SceneManager.LoadScene("Gane");
     }
 
     public void JoinLobby() => PhotonNetwork.JoinLobby();
-    public override void OnJoinedLobby() => Debug.Log("로비 접속");
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("로비 접속");
+    }
 
     public void connect() => PhotonNetwork.ConnectUsingSettings();
 
