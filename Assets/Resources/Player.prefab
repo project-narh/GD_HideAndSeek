@@ -187,6 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   rotationSpeed: 100
+  rayDistance: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3415539427106079911
 MonoBehaviour:
   m_ObjectHideFlags: 0

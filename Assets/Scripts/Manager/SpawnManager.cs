@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        Spawn();
         Spawn(20);
     }
 
