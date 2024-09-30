@@ -9,10 +9,15 @@ public class Controller : MonoBehaviourPun
 
     private void Start()
     {
-        pv = GetComponent<PhotonView>();
-        if(TryGetComponent<PlayerController>(out PlayerController player))
+        if (GetComponentInParent<PlayerController>() != null)
         {
             isPlayer = true;
+            pv = GetComponentInParent<PhotonView>();
+        }
+        else
+        {
+            pv = gameObject.AddComponent<PhotonView>();
+            gameObject.AddComponent<PhotonTransformView>();
         }
     }
     [PunRPC]
