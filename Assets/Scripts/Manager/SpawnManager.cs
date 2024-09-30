@@ -27,7 +27,8 @@ public class SpawnManager : MonoBehaviour
             {
                 // 충돌체가 없다면 프리팹 소환
                 Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-                PhotonNetwork.Instantiate("Tami", randomPosition, randomRotation);
+                //PhotonNetwork.Instantiate("Tami", randomPosition, randomRotation);
+                Instantiate(prefab, randomPosition, randomRotation);
                 index--;
             }
         }
