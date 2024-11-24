@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childObjects:
   - {fileID: 8198378310152825207}
+  interpolationSpeed: 10
 --- !u!1001 &2933305272385043313
 PrefabInstance:
   m_ObjectHideFlags: 0

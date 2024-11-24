@@ -21,6 +21,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.AutomaticallySyncScene = true; // 방에 참여한 클라이언트 동일한 씬 로드
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            PhotonNetwork.SendRate = 60;        // 초당 60회 패킷 전송
+            PhotonNetwork.SerializationRate = 30;
+            PhotonNetwork.LogLevel = PunLogLevel.Full;
         }
         else
         {
@@ -36,7 +39,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        switch(PhotonNetwork.NetworkClientState.ToString())
+        //Debug.Log($"Ping: {PhotonNetwork.GetPing()} ms");
+        //Debug.Log($"Traffic Stats: {PhotonNetwork.NetworkStatisticsToString()}");
+        switch (PhotonNetwork.NetworkClientState.ToString())
         {
             case "ConnectedToMasterServer":
                 StatusText.text = "Stats : 서버 연결 완료";
@@ -56,9 +61,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        //PhotonNetwork.JoinRandomRoom(); // 랜덤방에 참여 시도 만일 방이 없다면 OnJoinRandomFailed 콜백이 호출될까봐
+        PhotonNetwork.JoinRandomRoom(); // 랜덤방에 참여 시도 만일 방이 없다면 OnJoinRandomFailed 콜백이 호출될까봐
         print("서버 접속 성공");
-        PhotonNetwork.JoinLobby();
+        //PhotonNetwork.JoinLobby();
         //PhotonNetwork.LocalPlayer.NickName = this.NickNameInput.text;
     }
 
@@ -98,7 +103,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(roomName.text, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
+        //PhotonNetwork.CreateRoom(roomName.text, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
     }
 
     public void JoinRoom() => PhotonNetwork.JoinRoom(roomName.text);

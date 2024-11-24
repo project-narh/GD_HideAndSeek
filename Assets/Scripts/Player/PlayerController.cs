@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour
                 ObjectBasedRaycast();
             }
         }
+        else
+        {
+                
+        }
     }
     void ObjectBasedRaycast()
     {

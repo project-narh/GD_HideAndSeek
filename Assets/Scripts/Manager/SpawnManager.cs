@@ -12,14 +12,15 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         Spawn();
-        Spawn(20);
     }
 
     public void Spawn(int index) // Bot 소환
     {
-
+        Debug.Log("소환 소환ㄴㄴ");
+        Debug.Log(index);
         while (index > 0 )
         {
+            Debug.Log("소환 소환");
             Vector3 randomPosition = GetPosition();
 
             // 해당 위치에서 충돌체가 있는지 확인
@@ -31,6 +32,13 @@ public class SpawnManager : MonoBehaviour
                 index--;
             }
         }
+    }
+
+    public void GameReset(int index)
+    {
+        Debug.Log("실행됨" + index);
+        Spawn(index);
+        //PlayerpositionMove();
     }
 
     public void Spawn() // Player 소한
@@ -53,5 +61,54 @@ public class SpawnManager : MonoBehaviour
         randomPosition.y = 0.9f;
         return randomPosition;
     }
-    
+
+    Vector3 CheckGet()
+    {
+        Vector3 randomPosition;
+        while (true)
+        {
+            randomPosition = GetPosition();
+
+            if (!Physics.CheckSphere(randomPosition, 0.5f, mask)) break;
+        }
+        return randomPosition;
+    }
+
+    public void MoveAllPlayersToPosition(Vector3 targetPosition)
+    {
+        GameObject player = PhotonNetwork.LocalPlayer.TagObject as GameObject;
+    }
+
+    public void PlayerpositionMove()
+    {
+        PlayerController[] allPhotonViews = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController player in allPhotonViews)
+        {
+            PhotonView photonView = player.gameObject.GetComponent<PhotonView>();
+            Vector3 randomPosition;
+            while (true) 
+            {
+                randomPosition = GetPosition();
+
+                if (!Physics.CheckSphere(randomPosition, 0.5f, mask)) break;
+            }
+            
+            // PhotonView의 소유자가 있는 경우에만 처리
+            if (photonView.IsMine) // 자신의 클라이언트가 소유한 오브젝트만 처리
+            {
+                // 위치 변경을 다른 클라이언트와 동기화
+                photonView.RPC("UpdateObjectPosition", RpcTarget.All, randomPosition);
+            }
+        }
+    }
+
+    [PunRPC]
+    public void UpdateObjectPosition(Vector3 newPosition, PhotonMessageInfo info)
+    {
+        // PhotonView의 위치를 변경
+        transform.position = newPosition;
+
+        // 디버그 로그 (추적용)
+        Debug.Log($"오브젝트 {gameObject.name}의 위치가 {newPosition}으로 변경되었습니다. 호출자: {info.Sender.NickName}");
+    }
 }
