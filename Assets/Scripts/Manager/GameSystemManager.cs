@@ -46,13 +46,12 @@ public class GameSystemManager : MonoBehaviour
 
     public void GameStart()
     {
-        _timer.ResetTimer(5, OnTimer, OnTimerComplate);
+        _timer.ResetTimer(0, OnTimer, OnTimerComplate);
         playerData = Get_PlayerData();
     }
 
     public void OnTimer(int time)
     {
-        Debug.Log($"  {time}  ");
     }
 
     public void OnTimerComplate()
@@ -64,13 +63,10 @@ public class GameSystemManager : MonoBehaviour
 
     public void OnGameTimer(int index)
     {
-        Debug.Log($"  {index}  ");
-        Debug.Log(isTurn);
     }
 
     public void OnGameTimerComplate()
     {
-        Debug.Log("½ÇÇà");
         isTurn = isTurn ? false : true;
         _timer.ResetTimer(5, OnGameTimer, OnGameTimerComplate);
     }

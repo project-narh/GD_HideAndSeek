@@ -38,12 +38,12 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("실행됨" + index);
         Spawn(index);
-        //PlayerpositionMove();
+        PlayerpositionMove();
     }
 
     public void Spawn() // Player 소한
     {
-        PhotonNetwork.Instantiate("Player", player_lobby.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player", player_lobby.position, Quaternion.identity,0);
     }
     
     Vector3 GetPosition()
@@ -96,19 +96,11 @@ public class SpawnManager : MonoBehaviour
             // PhotonView의 소유자가 있는 경우에만 처리
             if (photonView.IsMine) // 자신의 클라이언트가 소유한 오브젝트만 처리
             {
+                Debug.Log("실행");
                 // 위치 변경을 다른 클라이언트와 동기화
-                photonView.RPC("UpdateObjectPosition", RpcTarget.All, randomPosition);
+                Debug.Log($"PhotonView ID: {photonView.ViewID}");
+                photonView.RPC("UpdateObjectPosition", RpcTarget.AllBuffered, randomPosition);
             }
         }
-    }
-
-    [PunRPC]
-    public void UpdateObjectPosition(Vector3 newPosition, PhotonMessageInfo info)
-    {
-        // PhotonView의 위치를 변경
-        transform.position = newPosition;
-
-        // 디버그 로그 (추적용)
-        Debug.Log($"오브젝트 {gameObject.name}의 위치가 {newPosition}으로 변경되었습니다. 호출자: {info.Sender.NickName}");
     }
 }

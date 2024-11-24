@@ -37,15 +37,14 @@ public class PlayerController : MonoBehaviour
             float y = Input.GetAxis("Vertical");
 
             Vector3 v = new Vector3(x, 0, y);
-
-            if(v.magnitude > 0.1f)
+            transform.Translate(v.normalized * speed * Time.deltaTime, Space.World);
+            if(x != 0 || y != 0 )
             {
-                // 캐릭터 이동
-                transform.Translate(v.normalized * speed * Time.deltaTime, Space.World);
-                Quaternion targetRotation = Quaternion.LookRotation(v.normalized, Vector3.up);
-                body.rotation = Quaternion.Slerp(body.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                //body.Rotate(y * rotationSpeed * Time.deltaTime, 0, 0);
+                Quaternion targetRotation = Quaternion.LookRotation(v.normalized);
+                body.rotation = targetRotation;
 
+                // 회전 값 동기화
+                pv.RPC("SyncChildRotation", RpcTarget.Others, targetRotation);
             }
             if (Input.GetMouseButtonDown(0)) // 왼쪽 클릭 감지
             {
@@ -53,10 +52,12 @@ public class PlayerController : MonoBehaviour
                 ObjectBasedRaycast();
             }
         }
-        else
-        {
-                
-        }
+    }
+    [PunRPC]
+    void SyncChildRotation(Quaternion rotation)
+    {
+        Transform child = transform.GetChild(0);
+        child.rotation = rotation;
     }
     void ObjectBasedRaycast()
     {
@@ -102,5 +103,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log($"{info.Sender.NickName}가 {gameObject.name}에게 {damage} 데미지를 요청했습니다.");
             pv.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
         }
+    }
+
+    [PunRPC]
+    public void UpdateObjectPosition(Vector3 newPosition)
+    {
+        // PhotonView의 위치를 변경
+        transform.position = newPosition;
+        Debug.Log("위치이동");
+        // 디버그 로그 (추적용)
+        Debug.Log($"오브젝트 {gameObject.name}의 위치가 {newPosition}으로 변경되었습니다.");
     }
 }

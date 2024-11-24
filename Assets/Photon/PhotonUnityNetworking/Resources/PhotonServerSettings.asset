@@ -44,6 +44,7 @@ MonoBehaviour:
   - RequestDamage
   - SyncPosition
   - UpdateObjectPosition
+  - SyncChildRotation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
