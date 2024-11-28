@@ -57,6 +57,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+
+
     void Connect() => PhotonNetwork.ConnectUsingSettings(); // 포톤 서버에 연결
 
     public override void OnConnectedToMaster()
@@ -87,7 +89,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("로비 접속");
+        //JoinRoom();
     }
+
+    
 
     public void connect() => PhotonNetwork.ConnectUsingSettings();
 
@@ -101,13 +106,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         this.CreateRoom(); // 방 참여 실패 했을때 호출하여 새로운 방 생성
     }
 
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("서버 접속 실패");
+        this.CreateRoom(); // 방 참여 실패 했을때 호출하여 새로운 방 생성
+    }
+
     public void CreateRoom()
     {
         //PhotonNetwork.CreateRoom(roomName.text, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 }); // 최대 플레이어 4명 참여  방 이름 roomNumber
     }
 
-    public void JoinRoom() => PhotonNetwork.JoinRoom(roomName.text);
+    //public void JoinRoom() => PhotonNetwork.JoinRoom(roomName.text);
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 

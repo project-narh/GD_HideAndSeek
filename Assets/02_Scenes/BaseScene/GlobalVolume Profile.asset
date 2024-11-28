@@ -346,14 +346,12 @@ MonoBehaviour:
   m_Name: GlobalVolume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -985780839704080689}
   - {fileID: 9144737182019549327}
   - {fileID: -6639687243964238981}
   - {fileID: -7965860617135372068}
   - {fileID: -7453575177017651615}
   - {fileID: -4600572949435571333}
   - {fileID: -6803168061399019580}
-  - {fileID: 262374218545426681}
 --- !u!114 &262374218545426681
 MonoBehaviour:
   m_ObjectHideFlags: 3

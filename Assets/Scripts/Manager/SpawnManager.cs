@@ -16,11 +16,9 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn(int index) // Bot 소환
     {
-        Debug.Log("소환 소환ㄴㄴ");
         Debug.Log(index);
         while (index > 0 )
         {
-            Debug.Log("소환 소환");
             Vector3 randomPosition = GetPosition();
 
             // 해당 위치에서 충돌체가 있는지 확인
@@ -36,7 +34,6 @@ public class SpawnManager : MonoBehaviour
 
     public void GameReset(int index)
     {
-        Debug.Log("실행됨" + index);
         Spawn(index);
         PlayerpositionMove();
     }
@@ -94,13 +91,8 @@ public class SpawnManager : MonoBehaviour
             }
             
             // PhotonView의 소유자가 있는 경우에만 처리
-            if (photonView.IsMine) // 자신의 클라이언트가 소유한 오브젝트만 처리
-            {
-                Debug.Log("실행");
-                // 위치 변경을 다른 클라이언트와 동기화
                 Debug.Log($"PhotonView ID: {photonView.ViewID}");
                 photonView.RPC("UpdateObjectPosition", RpcTarget.AllBuffered, randomPosition);
-            }
         }
     }
 }

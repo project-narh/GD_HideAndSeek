@@ -1,45 +1,64 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Controller : MonoBehaviourPun
+public class Controller : MonoBehaviour
 {
-    PhotonView pv;
-    bool isPlayer = false;
-    int hp = 3;
+    public PhotonView pv;
+    public bool isPlayer = false;
+    public int hp = 3;
 
     private void Start()
     {
-        if (GetComponentInParent<PlayerController>() != null)
-        {
-            isPlayer = true;
-            pv = GetComponentInParent<PhotonView>();
-        }
-        else
-        {
-            pv = gameObject.AddComponent<PhotonView>();
-            gameObject.AddComponent<PhotonTransformView>();
-        }
+        /*        if (GetComponentInParent<PlayerController>() != null)
+                {
+                    Debug.Log("플레이어 맞음");
+                    isPlayer = true;
+                    pv = GetComponentInParent<PhotonView>();
+                    Debug.Log(pv + "플레이어");
+                }
+                else
+                {
+                    pv = gameObject.AddComponent<PhotonView>();
+                    gameObject.AddComponent<PhotonTransformView>();
+                }*/
+        Init();
     }
-    [PunRPC]
-    public void TakeDamage()
+    
+    public virtual void Init()
     {
-        if (!pv.IsMine)
-            return;
+        isPlayer = false;
+        pv = gameObject.AddComponent<PhotonView>();
+        gameObject.AddComponent<PhotonTransformView>();
+    }
 
+
+    public void CallTakeDamage(PhotonView view)
+    {
+        view.RPC("TakeDamageDDD", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void TakeDamageDDD()
+    {
         hp--;
-        Debug.Log($"{gameObject.name} 현재 HP: {hp}");
+        Debug.Log($"현재 HP: {hp}");
 
         if (hp <= 0)
         {
             // HP가 0 이하가 되면 오브젝트 비활성화
-            if(!isPlayer)
-                photonView.RPC("DisableObject", RpcTarget.AllBuffered);
+            pv.RPC("DisableObject", RpcTarget.All);
         }
     }
 
     [PunRPC]
     public void DisableObject()
     {
-        gameObject.SetActive(false);
+        if (!isPlayer)
+            gameObject.SetActive(false);
+        else
+            Dead();
+
     }
+
+    protected virtual void Dead(){}
 }

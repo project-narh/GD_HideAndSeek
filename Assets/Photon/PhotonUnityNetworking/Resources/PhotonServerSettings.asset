@@ -40,11 +40,17 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - DisableObject
-  - TakeDamage
   - RequestDamage
   - SyncPosition
   - UpdateObjectPosition
   - SyncChildRotation
+  - SyncPlayerState
+  - SyncObjectState
+  - TakeDamage
+  - TakeDamageDDD
+  - SyncSharedVariable
+  - SysnList
+  - SyncGamePlayerDataRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
